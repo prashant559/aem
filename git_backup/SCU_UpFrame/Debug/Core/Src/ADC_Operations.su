@@ -1,0 +1,4 @@
+../Core/Src/ADC_Operations.c:134:9:ADC_operation	16	static
+../Core/Src/ADC_Operations.c:371:10:ADC_READ	88	static
+../Core/Src/ADC_Operations.c:870:9:check_sensor_validity	16	static
+../Core/Src/ADC_Operations.c:880:9:wire_break	24	static

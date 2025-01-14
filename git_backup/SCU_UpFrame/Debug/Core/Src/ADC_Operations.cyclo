@@ -1,0 +1,4 @@
+../Core/Src/ADC_Operations.c:134:9:ADC_operation	4
+../Core/Src/ADC_Operations.c:371:10:ADC_READ	36
+../Core/Src/ADC_Operations.c:870:9:check_sensor_validity	3
+../Core/Src/ADC_Operations.c:880:9:wire_break	9

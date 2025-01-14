@@ -1,0 +1,11 @@
+../Core/Src/SRAM_Operations.c:75:9:SRAM_operation	4
+../Core/Src/SRAM_Operations.c:234:6:get_NAND_data	1
+../Core/Src/SRAM_Operations.c:248:9:get_NAND_address	4
+../Core/Src/SRAM_Operations.c:264:6:update_NAND_addr	1
+../Core/Src/SRAM_Operations.c:272:6:update_NAND_CyclicAddr	1
+../Core/Src/SRAM_Operations.c:280:9:get_NAND_CyclicAddr	1
+../Core/Src/SRAM_Operations.c:289:6:update_SRAM_Addr	2
+../Core/Src/SRAM_Operations.c:302:10:get_SRAM_Addr	3
+../Core/Src/SRAM_Operations.c:325:9:Init_NAND_addr	1
+../Core/Src/SRAM_Operations.c:335:9:Decimal_to_BCD	1
+../Core/Src/SRAM_Operations.c:343:6:time_setter	1

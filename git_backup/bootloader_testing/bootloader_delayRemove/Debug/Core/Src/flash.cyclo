@@ -1,0 +1,4 @@
+../Core/Src/flash.c:29:6:GetSectorAndBank	2
+../Core/Src/flash.c:46:14:flash_erase	5
+../Core/Src/flash.c:94:14:flash_write	8
+../Core/Src/flash.c:133:6:flash_jump_to_app	1

@@ -1,0 +1,54 @@
+#include "stm32f7xx.h"
+
+volatile uint16_t adc_value = 0;
+
+void ADC_Init(void) {
+    // Enable the ADC and GPIO clocks
+    RCC->APB2ENR |= RCC_APB2ENR_ADC1EN;  // Enable ADC1 clock
+    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN; // Enable GPIOA clock
+
+    // Configure the GPIO pin for analog mode (e.g., PA0 -> ADC1_IN0)
+    GPIOA->MODER |= GPIO_MODER_MODER0;  // Set PA0 to analog mode
+    GPIOA->PUPDR &= ~GPIO_PUPDR_PUPDR0; // No pull-up, pull-down
+
+    // Configure the ADC settings
+    ADC1->CR2 &= ~ADC_CR2_ADON;          // Ensure ADC is off before configuration
+    ADC1->CR1 = ADC_CR1_EOCIE;           // Enable end-of-conversion interrupt
+    ADC1->CR2 = ADC_CR2_CONT;            // Continuous conversion mode
+    ADC1->SQR1 = 0;                      // Single conversion (1 channel)
+    ADC1->SQR3 = 0;                      // First conversion in regular sequence is channel 0
+
+    // Set sample time (e.g., 15 cycles for channel 0)
+    ADC1->SMPR2 |= (0x1 << ADC_SMPR2_SMP0_Pos);
+
+    // Enable ADC interrupt in NVIC
+    NVIC_EnableIRQ(ADC_IRQn);
+
+    // Turn on the ADC
+    ADC1->CR2 |= ADC_CR2_ADON;
+
+    // Perform a calibration (optional but recommended)
+    ADC1->CR2 |= ADC_CR2_CAL;            // Start calibration
+    while (ADC1->CR2 & ADC_CR2_CAL) {}   // Wait for calibration to complete
+
+    // Start ADC conversion
+    ADC1->CR2 |= ADC_CR2_SWSTART;
+}
+
+void ADC_IRQHandler(void) {
+    if (ADC1->SR & ADC_SR_EOC) {         // Check end-of-conversion flag
+        adc_value = (uint16_t)ADC1->DR;  // Read the conversion result
+        ADC1->SR &= ~ADC_SR_EOC;         // Clear the EOC flag
+    }
+}
+
+int main(void) {
+    // Initialize the ADC
+    ADC_Init();
+
+    // Main loop
+    while (1) {
+        // The adc_value variable will be updated in the interrupt handler
+        // Add application logic here (e.g., process the adc_value)
+    }
+}
